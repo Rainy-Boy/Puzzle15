@@ -1,7 +1,7 @@
 ﻿
 namespace Puzzle15
 {
-    partial class Form1
+    partial class Puzzle
     {
         /// <summary>
         /// Required designer variable.
@@ -31,12 +31,12 @@ namespace Puzzle15
         {
             this.SuspendLayout();
             // 
-            // Form1
+            // Puzzle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(848, 470);
-            this.Name = "Form1";
+            this.ClientSize = new System.Drawing.Size(602, 610);
+            this.Name = "Puzzle";
             this.Text = "Form1";
             this.ResumeLayout(false);
 
