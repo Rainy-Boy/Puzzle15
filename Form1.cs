@@ -17,6 +17,7 @@ namespace Puzzle15
 
         public Puzzle()
         {
+            this.BackColor = Color.DarkBlue;
             InitializeComponent();
             InitializePuzzle();
             ShuffleTiles();
@@ -82,5 +83,7 @@ namespace Puzzle15
                 SwapTiles(tiles[rand.Next(0, 15)]);
             }
         }
+
+
     }
 }
