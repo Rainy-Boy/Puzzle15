@@ -13,8 +13,9 @@ namespace Puzzle15
     public partial class Puzzle : Form
     {
         List<Button> tiles = new List<Button>();
-        List<Label> labels = new List<Label>();     //for the future
+        List<Label> labels = new List<Label>();     
         Random rand = new Random();
+        private Timer mainTimer = null;
 
         public Puzzle()
         {
@@ -22,6 +23,7 @@ namespace Puzzle15
             InitializeComponent();
             InitializePuzzle();
             ShuffleTiles();
+            InitializeMainTimer();
         }
 
         private void InitializePuzzle()
@@ -84,6 +86,7 @@ namespace Puzzle15
             {
                 SwapTiles(tiles[rand.Next(0, 15)]);
             }
+            AddLabels();
         }
 
         private void AddLabels()
@@ -96,43 +99,69 @@ namespace Puzzle15
             horLabel.Location = tileEmpty.Location;
             horLabel.Width = labelWidth;
             horLabel.Height = 20;
-            horLabel.Text = "teeeeeeeeeeeeeeeeeeeeeeeeeeeest";
+            horLabel.Text = null;
             this.Controls.Add(horLabel);
+            labels.Add(horLabel);
 
             Label leftHorLabel = new Label();
             leftHorLabel.Left = tileEmpty.Left - 30;
             leftHorLabel.Top = tileEmpty.Top;
             leftHorLabel.Width = labelWidth;
             leftHorLabel.Height = 20;
-            leftHorLabel.Text = "teeeeeeeeeeeeeeeeeeeest";
+            leftHorLabel.Text = null;
             this.Controls.Add(leftHorLabel);
+            labels.Add(leftHorLabel);
 
             Label verLabel = new Label();
             verLabel.Location = tileEmpty.Location;
             verLabel.Width = 10;
             verLabel.Height = labelHeight;
-            verLabel.Text = "teeeeeeeeeeeeeeeeeeeeeeeeest";
+            verLabel.Text = null;
             this.Controls.Add(verLabel);
+            labels.Add(verLabel);
 
             Label topVerLabel = new Label();
             topVerLabel.Location = tileEmpty.Location;
             topVerLabel.Top = tileEmpty.Top - 30;
             topVerLabel.Width = 10;
             topVerLabel.Height = labelHeight;
-            topVerLabel.Text = "teeeeeeeeeeeeeeeeeeeest";
+            topVerLabel.Text = null;
             this.Controls.Add(topVerLabel);
+            labels.Add(topVerLabel);
+        }
+
+        private void InitializeMainTimer()
+        {
+            mainTimer = new Timer();
+            mainTimer.Interval = 10;
+            mainTimer.Tick += MainTimer_Tick;
+            mainTimer.Start();
+        }
+
+        private void MainTimer_Tick(object sender, EventArgs e)
+        {
+            CheckLabelIntersection();
         }
 
         private void CheckLabelIntersection()
         {
-            //if(label.bounds.intersectswith(!tileEmpty) {give tag}
-            //moš vajadzēs taimeri lai checkotu collisionu
-            TagGiver();
+            foreach (var label in labels)
+            {
+                foreach (var tile in tiles)
+                {
+                    if (label.Bounds.IntersectsWith(tile.Bounds))
+                    {
+                        tile.BackColor = Color.Red;
+                    }
+                }
+            }
         }
 
         private void TagGiver()
         {
-
+            //if(label.bounds.intersectswith(!tileEmpty) {give tag}
+            //moš vajadzēs taimeri lai checkotu collisionu
+            
         }
 
     }
