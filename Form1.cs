@@ -73,11 +73,19 @@ namespace Puzzle15
 
         private void SwapTiles(Button tile)
         {
-            Button tileEmpty = (Button)this.Controls["TileEmpty"];
+            if ((string)tile.Tag == "CanSwap")
+            {
+                Button tileEmpty = (Button)this.Controls["TileEmpty"];
+
+                Point tileOldLocation = tile.Location;
+                tile.Location = tileEmpty.Location;
+                tileEmpty.Location = tileOldLocation;
+            }
+            else
+            {
+                return;
+            }
             
-            Point tileOldLocation = tile.Location;
-            tile.Location = tileEmpty.Location;
-            tileEmpty.Location = tileOldLocation;
         }
 
         private void ShuffleTiles()
@@ -151,7 +159,7 @@ namespace Puzzle15
                 {
                     if (label.Bounds.IntersectsWith(tile.Bounds))
                     {
-                        tile.BackColor = Color.Red;
+                        tile.Tag = "CanSwap";
                     }
                 }
             }
