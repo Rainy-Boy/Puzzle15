@@ -69,6 +69,7 @@ namespace Puzzle15
             Button tile = (Button)sender;
             SwapTiles(tile);
             AddLabels();
+
         }
 
         private void SwapTiles(Button tile)
@@ -102,14 +103,14 @@ namespace Puzzle15
             Button tileEmpty = (Button)this.Controls["TileEmpty"];
             var labelWidth = 120;
             var labelHeight = 120;
+            Label label = new Label();
 
             Label horLabel = new Label();
             horLabel.Location = tileEmpty.Location;
             horLabel.Width = labelWidth;
             horLabel.Height = 20;
             horLabel.Text = null;
-            this.Controls.Add(horLabel);
-            labels.Add(horLabel);
+            
 
             Label leftHorLabel = new Label();
             leftHorLabel.Left = tileEmpty.Left - 30;
@@ -117,16 +118,14 @@ namespace Puzzle15
             leftHorLabel.Width = labelWidth;
             leftHorLabel.Height = 20;
             leftHorLabel.Text = null;
-            this.Controls.Add(leftHorLabel);
-            labels.Add(leftHorLabel);
+            
 
             Label verLabel = new Label();
             verLabel.Location = tileEmpty.Location;
             verLabel.Width = 10;
             verLabel.Height = labelHeight;
             verLabel.Text = null;
-            this.Controls.Add(verLabel);
-            labels.Add(verLabel);
+            
 
             Label topVerLabel = new Label();
             topVerLabel.Location = tileEmpty.Location;
@@ -134,8 +133,16 @@ namespace Puzzle15
             topVerLabel.Width = 10;
             topVerLabel.Height = labelHeight;
             topVerLabel.Text = null;
-            this.Controls.Add(topVerLabel);
-            labels.Add(topVerLabel);
+
+
+            this.Controls.Add(horLabel);
+            labels.Add(horLabel);
+            this.Controls.Add(leftHorLabel);
+            labels.Add(leftHorLabel);
+            this.Controls.Add(verLabel);
+            labels.Add(verLabel);
+
+
         }
 
         private void InitializeMainTimer()
@@ -148,7 +155,9 @@ namespace Puzzle15
 
         private void MainTimer_Tick(object sender, EventArgs e)
         {
+            
             CheckLabelIntersection();
+            
         }
 
         private void CheckLabelIntersection()
@@ -161,16 +170,35 @@ namespace Puzzle15
                     {
                         tile.Tag = "CanSwap";
                     }
+                    else
+                    {
+                        //label.Dispose();
+                        //tile.Tag = null; doesn't work
+                    }
+                }
+            }
+            
+        }
+
+
+        //doesn't work also
+        private void RemoveTags()
+        {
+            foreach (var label in labels)
+            {
+                foreach (var tile in tiles)
+                {
+                    if (!label.Bounds.IntersectsWith(tile.Bounds))
+                    {
+                        Controls.Remove(label);
+                        label.Dispose();
+                        tile.Tag = null;
+                    }
                 }
             }
         }
 
-        private void TagGiver()
-        {
-            //if(label.bounds.intersectswith(!tileEmpty) {give tag}
-            //moš vajadzēs taimeri lai checkotu collisionu
-            
-        }
+     
 
     }
 }
