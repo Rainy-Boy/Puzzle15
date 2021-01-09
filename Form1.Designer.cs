@@ -29,6 +29,7 @@ namespace Puzzle15
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Puzzle));
             this.SuspendLayout();
             // 
             // Puzzle
@@ -36,8 +37,9 @@ namespace Puzzle15
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(602, 610);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Puzzle";
-            this.Text = "Form1";
+            this.Text = "Puzzle made with Datorium";
             this.ResumeLayout(false);
 
         }
